@@ -47,6 +47,7 @@
 			this.question.Size = new System.Drawing.Size(440, 152);
 			this.question.TabIndex = 0;
 			this.question.Text = "Select a question type below";
+			this.question.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// answer
 			// 

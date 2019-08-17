@@ -24,8 +24,8 @@ namespace NetworkMathPractice
 		private void MathPractice_Load(object sender, EventArgs e)
 		{
 			questionType.Items.Add("Multiples of 16");
-			//questionType.Items.Add("Dec to Hex (0-15)");
-			//questionType.Items.Add("Dec to Hex (0-255)");
+			questionType.Items.Add("Dec to Hex (0-15)");
+			questionType.Items.Add("Dec to Hex (0-255)");
 			//questionType.Items.Add("Hex to Dec (0-15)");
 			//questionType.Items.Add("Hex to Dec (0-255)");
 		}
@@ -52,12 +52,16 @@ namespace NetworkMathPractice
 				case "Dec to Hex (0-15)":
 					instructions.Text = "Dec to Hex: Convert the number below from decimal to hexidecimal";
 					break;
+				case "Dec to Hex (0-255)":
+					instructions.Text = "Dec to Hex: Convert the number below from decimal to hexidecimal. Your answer should have 2 digits; use a leading 0 if necessary (e.g. 14 Dec = 0E Hex)";
+					break;
 			}
 				
 		}
 
 		private void newProblem(string qType)
 		{
+			
 			switch (qType)
 			{
 				case "Multiples of 16":
@@ -65,6 +69,18 @@ namespace NetworkMathPractice
 					expectedAnswer = (a * 16).ToString();
 					question.Text = "16 × " + a.ToString();
 					break;
+				case "Dec to Hex (0-15)":
+					var b = random.Next(16);
+					expectedAnswer = b.ToString("X1");
+					question.Text = b.ToString();
+					break;
+				case "Dec to Hex (0-255)":
+					var c = random.Next(256);
+					expectedAnswer = c.ToString("X2");
+					question.Text = c.ToString();
+					break;
+
+
 			}
 			answer.Text = "";
 			answer.Focus();
@@ -82,7 +98,7 @@ namespace NetworkMathPractice
 		private void Enter_Click(object sender, EventArgs e)
 		{
 			if (answer.Text == "") return;
-			if (answer.Text == expectedAnswer)
+			if (answer.Text.ToUpper() == expectedAnswer)
 			{
 				score.Correct++;
 				newProblem(getQType());
