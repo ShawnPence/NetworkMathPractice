@@ -45,7 +45,7 @@
 			this.question.Location = new System.Drawing.Point(8, 72);
 			this.question.Name = "question";
 			this.question.Size = new System.Drawing.Size(440, 152);
-			this.question.TabIndex = 0;
+			this.question.TabIndex = 1;
 			this.question.Text = "Select a question type below";
 			this.question.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
@@ -55,7 +55,7 @@
 			this.answer.Location = new System.Drawing.Point(8, 232);
 			this.answer.Name = "answer";
 			this.answer.Size = new System.Drawing.Size(440, 29);
-			this.answer.TabIndex = 1;
+			this.answer.TabIndex = 2;
 			this.answer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			// 
 			// enter
@@ -64,19 +64,20 @@
 			this.enter.Location = new System.Drawing.Point(368, 272);
 			this.enter.Name = "enter";
 			this.enter.Size = new System.Drawing.Size(75, 25);
-			this.enter.TabIndex = 2;
+			this.enter.TabIndex = 4;
 			this.enter.Text = "Enter";
 			this.enter.UseVisualStyleBackColor = true;
 			this.enter.Click += new System.EventHandler(this.Enter_Click);
 			// 
 			// questionType
 			// 
+			this.questionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.questionType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.questionType.FormattingEnabled = true;
 			this.questionType.Location = new System.Drawing.Point(8, 384);
 			this.questionType.Name = "questionType";
 			this.questionType.Size = new System.Drawing.Size(192, 24);
-			this.questionType.TabIndex = 3;
+			this.questionType.TabIndex = 6;
 			this.questionType.SelectedIndexChanged += new System.EventHandler(this.QuestionType_SelectedIndexChanged);
 			// 
 			// questionTypeLabel
@@ -86,7 +87,7 @@
 			this.questionTypeLabel.Location = new System.Drawing.Point(8, 360);
 			this.questionTypeLabel.Name = "questionTypeLabel";
 			this.questionTypeLabel.Size = new System.Drawing.Size(101, 17);
-			this.questionTypeLabel.TabIndex = 4;
+			this.questionTypeLabel.TabIndex = 5;
 			this.questionTypeLabel.Text = "Question Type";
 			// 
 			// reset
@@ -96,7 +97,7 @@
 			this.reset.Location = new System.Drawing.Point(208, 384);
 			this.reset.Name = "reset";
 			this.reset.Size = new System.Drawing.Size(104, 25);
-			this.reset.TabIndex = 2;
+			this.reset.TabIndex = 7;
 			this.reset.Text = "Start / Reset";
 			this.reset.UseVisualStyleBackColor = true;
 			this.reset.Click += new System.EventHandler(this.Reset_Click);
@@ -107,7 +108,7 @@
 			this.instructions.Location = new System.Drawing.Point(8, 8);
 			this.instructions.Name = "instructions";
 			this.instructions.Size = new System.Drawing.Size(440, 56);
-			this.instructions.TabIndex = 5;
+			this.instructions.TabIndex = 0;
 			this.instructions.Text = "Instructions: Select a question type below.";
 			// 
 			// currentScore
@@ -116,7 +117,7 @@
 			this.currentScore.Location = new System.Drawing.Point(8, 272);
 			this.currentScore.Name = "currentScore";
 			this.currentScore.Size = new System.Drawing.Size(176, 24);
-			this.currentScore.TabIndex = 5;
+			this.currentScore.TabIndex = 3;
 			this.currentScore.Text = "0/0 (100%)";
 			// 
 			// MathPractice

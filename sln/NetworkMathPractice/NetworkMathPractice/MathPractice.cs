@@ -26,15 +26,14 @@ namespace NetworkMathPractice
 			questionType.Items.Add("Multiples of 16");
 			questionType.Items.Add("Dec to Hex (0-15)");
 			questionType.Items.Add("Dec to Hex (0-255)");
-			//questionType.Items.Add("Hex to Dec (0-15)");
-			//questionType.Items.Add("Hex to Dec (0-255)");
+			questionType.Items.Add("Hex to Dec (0-15)");
+			questionType.Items.Add("Hex to Dec (0-255)");
 		}
 
 		private string getQType()
 		{
 			if (questionType.SelectedItem != null) return questionType.SelectedItem.ToString();
 			return "";
-
 		}
 
 		private void QuestionType_SelectedIndexChanged(object sender, EventArgs e)
@@ -55,13 +54,15 @@ namespace NetworkMathPractice
 				case "Dec to Hex (0-255)":
 					instructions.Text = "Dec to Hex: Convert the number below from decimal to hexidecimal. Your answer should have 2 digits; use a leading 0 if necessary (e.g. 14 Dec = 0E Hex)";
 					break;
+				case "Hex to Dec (0-15)":
+				case "Hex to Dec (0-255)":
+					instructions.Text = "Hex to Dec: Convert the number below from hexidecimal to decimal.";
+					break;
 			}
-				
 		}
 
 		private void newProblem(string qType)
 		{
-			
 			switch (qType)
 			{
 				case "Multiples of 16":
@@ -79,8 +80,16 @@ namespace NetworkMathPractice
 					expectedAnswer = c.ToString("X2");
 					question.Text = c.ToString();
 					break;
-
-
+				case "Hex to Dec (0-15)":
+					var d = random.Next(16);
+					question.Text = d.ToString("X1");
+					expectedAnswer = d.ToString();
+					break;
+				case "Hex to Dec (0-255)":
+					var e = random.Next(256);
+					question.Text = e.ToString("X2");
+					expectedAnswer = e.ToString();
+					break;
 			}
 			answer.Text = "";
 			answer.Focus();
@@ -110,8 +119,6 @@ namespace NetworkMathPractice
 			}
 			currentScore.Text = score.ScoreString;
 		}
-
-
 	}
 
 	class Score
@@ -131,7 +138,6 @@ namespace NetworkMathPractice
 				if (Correct == 0 && Incorrect == 0) return 1.0m;
 				return Convert.ToDecimal(Correct) / Convert.ToDecimal(Correct + Incorrect);
 			}
-
 		}
 
 		public string ScoreString
@@ -141,6 +147,5 @@ namespace NetworkMathPractice
 				return Correct.ToString() + "/" + (Correct + Incorrect).ToString() + " (" + CorrectPct.ToString("P0") + ")";
 			}
 		}
-
 	}
 }
