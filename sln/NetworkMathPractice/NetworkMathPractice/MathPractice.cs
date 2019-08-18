@@ -28,6 +28,10 @@ namespace NetworkMathPractice
 			questionType.Items.Add("Dec to Hex (0-255)");
 			questionType.Items.Add("Hex to Dec (0-15)");
 			questionType.Items.Add("Hex to Dec (0-255)");
+			questionType.Items.Add("Dec to Bin (0-15)");
+			questionType.Items.Add("Dec to Bin (0-255)");
+			questionType.Items.Add("Bin to Dec (0-15)");
+			questionType.Items.Add("Bin to Dec (0-255)");
 		}
 
 		private string getQType()
@@ -58,6 +62,17 @@ namespace NetworkMathPractice
 				case "Hex to Dec (0-255)":
 					instructions.Text = "Hex to Dec: Convert the number below from hexidecimal to decimal.";
 					break;
+				case "Dec to Bin (0-15)":
+					instructions.Text = "Dec to Bin: Convert the following number from decimal to binary. Your answer should have 4 digits (e.g. 2 dec = 0010 bin); use leading zeros if necessary.";
+					break;
+				case "Dec to Bin (0-255)":
+					instructions.Text = "Dec to Bin: Convert the following number from decimal to binary. Your answer should have 8 digits (e.g. 3 dec = 00000011 bin); use leading zeros if necessary.";
+					break;
+				case "Bin to Dec (0-15)":
+				case "Bin to Dec (0-255)":
+					instructions.Text = "Bin to Dec: Convert the following number from binary to decimal.";
+					break;
+
 			}
 		}
 
@@ -90,6 +105,27 @@ namespace NetworkMathPractice
 					question.Text = e.ToString("X2");
 					expectedAnswer = e.ToString();
 					break;
+				case "Dec to Bin (0-15)":
+					var f = random.Next(16);
+					question.Text = f.ToString();
+					expectedAnswer = Convert.ToString(f, 2).PadLeft(4, '0');
+					break;
+				case "Dec to Bin (0-255)":
+					var g = random.Next(256);
+					question.Text = g.ToString();
+					expectedAnswer = Convert.ToString(g, 2).PadLeft(8, '0');
+					break;
+				case "Bin to Dec (0-15)":
+					var h = random.Next(16);
+					expectedAnswer = h.ToString();
+					question.Text = Convert.ToString(h, 2).PadLeft(4, '0');
+					break;
+				case "Bin to Dec (0-255)":
+					var i = random.Next(256);
+					expectedAnswer = i.ToString();
+					question.Text = Convert.ToString(i, 2).PadLeft(8, '0');
+					break;
+
 			}
 			answer.Text = "";
 			answer.Focus();
