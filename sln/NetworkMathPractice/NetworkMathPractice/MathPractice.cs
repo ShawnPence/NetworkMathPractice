@@ -15,6 +15,7 @@ namespace NetworkMathPractice
 		string expectedAnswer = "";
 		Random random = new Random();
 		Score score = new Score();
+		const uint eightBitMask = 255;
 
 		public MathPractice()
 		{
@@ -32,6 +33,8 @@ namespace NetworkMathPractice
 			questionType.Items.Add("Dec to Bin (0-255)");
 			questionType.Items.Add("Bin to Dec (0-15)");
 			questionType.Items.Add("Bin to Dec (0-255)");
+			questionType.Items.Add("Subnet Masks A.B.C.D to /BitsOfMask");
+			questionType.Items.Add("Subnet Masks /BitsOfMask to A.B.C.D");
 		}
 
 		private string getQType()
@@ -71,6 +74,12 @@ namespace NetworkMathPractice
 				case "Bin to Dec (0-15)":
 				case "Bin to Dec (0-255)":
 					instructions.Text = "Bin to Dec: Convert the following number from binary to decimal.";
+					break;
+				case "Subnet Masks A.B.C.D to /BitsOfMask":
+					instructions.Text = "Subnet Masks: Convert the subnet mask to the number of bits of mask. Enter your anser as /number (e.g. 255.255.255.0 would be entered as /24)";
+					break;
+				case "Subnet Masks /BitsOfMask to A.B.C.D":
+					instructions.Text =  "Subnet Masks: Convert the number of bits of mask to a subnet mask (e.g. /24 would be entered as 255.255.255.0)";
 					break;
 
 			}
@@ -125,6 +134,16 @@ namespace NetworkMathPractice
 					expectedAnswer = i.ToString();
 					question.Text = Convert.ToString(i, 2).PadLeft(8, '0');
 					break;
+				case "Subnet Masks A.B.C.D to /BitsOfMask":
+					var j = random.Next(23) + 8;
+					expectedAnswer = "/" + j.ToString();
+					question.Text = bitsOfMaskToSubnetMask(j);
+					break;
+				case "Subnet Masks /BitsOfMask to A.B.C.D":
+					var k = random.Next(23) + 8;
+					question.Text = "/" + k.ToString();
+					expectedAnswer = bitsOfMaskToSubnetMask(k);
+					break;
 
 			}
 			answer.Text = "";
@@ -154,6 +173,20 @@ namespace NetworkMathPractice
 				answer.Focus();
 			}
 			currentScore.Text = score.ScoreString;
+		}
+
+		private string bitsOfMaskToSubnetMask(int bitsOfMask)
+		{
+			uint mask = 0;
+			for (int i = 0; i < bitsOfMask; i++)
+			{
+				mask <<= 1;
+				mask += 1;
+			}
+			mask <<= (32 - bitsOfMask);
+			return ((mask >> 24) & eightBitMask).ToString() + "." + ((mask >> 16) & eightBitMask).ToString() + "." + ((mask >> 8) & eightBitMask).ToString() + "." + (mask & eightBitMask).ToString();
+
+
 		}
 	}
 
