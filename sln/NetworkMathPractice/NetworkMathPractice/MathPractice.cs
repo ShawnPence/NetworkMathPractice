@@ -24,6 +24,8 @@ namespace NetworkMathPractice
 
 		private void MathPractice_Load(object sender, EventArgs e)
 		{
+			currentScore.DataBindings.Add(new Binding("Text", score, "ScoreString", false, DataSourceUpdateMode.OnPropertyChanged));
+
 			questionType.Items.Add("Multiples of 16");
 			questionType.Items.Add("Dec to Hex (0-15)");
 			questionType.Items.Add("Dec to Hex (0-255)");
@@ -152,8 +154,7 @@ namespace NetworkMathPractice
 
 		private void Reset_Click(object sender, EventArgs e)
 		{
-			score = new Score();
-			currentScore.Text = score.ScoreString;
+			score.Reset();
 			newProblem(getQType());
 			answer.Text = "";
 			answer.Focus();
@@ -172,7 +173,6 @@ namespace NetworkMathPractice
 				answer.Text = "";
 				answer.Focus();
 			}
-			currentScore.Text = score.ScoreString;
 		}
 
 		private string bitsOfMaskToSubnetMask(int bitsOfMask)
@@ -190,11 +190,43 @@ namespace NetworkMathPractice
 		}
 	}
 
-	class Score
+	class Score : INotifyPropertyChanged
 	{
-		public int Correct { get; set; }
-		public int Incorrect { get; set; }
+		private int incorrect;
+		private int correct;
+
+		public int Correct
+		{
+			get => correct;
+			set
+			{
+				correct = value;
+				NotifyPropertyChanged("ScoreString");
+			}
+		}
+		public int Incorrect
+		{
+			get => incorrect;
+			set
+			{
+				incorrect = value;
+				NotifyPropertyChanged("ScoreString");
+			}
+		}
 		public Score()
+		{
+			Correct = 0;
+			Incorrect = 0;
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		private void NotifyPropertyChanged(string propertyName)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+
+		public void Reset()
 		{
 			Correct = 0;
 			Incorrect = 0;
