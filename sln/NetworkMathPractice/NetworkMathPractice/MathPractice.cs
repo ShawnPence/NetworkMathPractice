@@ -201,7 +201,7 @@ namespace NetworkMathPractice
 			set
 			{
 				correct = value;
-				NotifyPropertyChanged("ScoreString");
+				NotifyPropertyChanged(nameof(ScoreString));
 			}
 		}
 		public int Incorrect
@@ -210,7 +210,7 @@ namespace NetworkMathPractice
 			set
 			{
 				incorrect = value;
-				NotifyPropertyChanged("ScoreString");
+				NotifyPropertyChanged(nameof(ScoreString));
 			}
 		}
 		public Score()
